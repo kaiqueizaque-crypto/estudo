@@ -55,7 +55,7 @@ function handleCredential(res){
 
 function handleToken(token){
   localStorage.setItem("google_access_token", token.access_token);
-  location.href = "index.php";
+  location.href = "index.html";
 }
 
 function parseJwt (token) {
@@ -63,4 +63,5 @@ function parseJwt (token) {
 }
 </script>
 </body>
+
 </html>
