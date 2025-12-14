@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login — SIGMA</title>
+
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+
+<style>
+body{
+  margin:0;height:100vh;display:flex;align-items:center;justify-content:center;
+  background:#eef2f7;font-family:Inter,system-ui
+}
+.card{
+  background:#fff;padding:28px;border-radius:14px;width:360px;text-align:center
+}
+</style>
+</head>
+
+<body>
+<div class="card">
+  <h2>SIGMA</h2>
+  <p>Login com Google para sincronizar seus estudos.</p>
+  <div id="btn"></div>
+</div>
+
+<script>
+let tokenClient;
+
+window.onload = () => {
+  google.accounts.id.initialize({
+    client_id: "553818652026-vjsmkokm1pibph3ehai36q3pmbp8js88.apps.googleusercontent.com",
+    callback: handleCredential
+  });
+
+  google.accounts.id.renderButton(btn, {
+    theme:"filled_blue",
+    size:"large",
+    width:260
+  });
+
+  tokenClient = google.accounts.oauth2.initTokenClient({
+    client_id: "553818652026-vjsmkokm1pibph3ehai36q3pmbp8js88.apps.googleusercontent.com",
+    scope: "https://www.googleapis.com/auth/spreadsheets",
+    prompt: "consent",
+    callback: handleToken
+  });
+};
+
+function handleCredential(res){
+  localStorage.setItem("user_email", parseJwt(res.credential).email);
+  tokenClient.requestAccessToken();
+}
+
+function handleToken(token){
+  localStorage.setItem("google_access_token", token.access_token);
+  location.href = "index.php";
+}
+
+function parseJwt (token) {
+  return JSON.parse(atob(token.split('.')[1]));
+}
+</script>
+</body>
+</html>
