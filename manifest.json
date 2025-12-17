@@ -1,7 +1,7 @@
 {
   "name": "SIGMA - Guia de Estudos",
   "short_name": "SIGMA",
-  "start_url": "./sigma.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f4f6fb",
   "theme_color": "#0b5ea8",
@@ -18,3 +18,4 @@
     }
   ]
 }
+
